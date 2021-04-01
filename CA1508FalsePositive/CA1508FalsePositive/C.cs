@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CA1508FalsePositive
 {
@@ -23,5 +24,34 @@ namespace CA1508FalsePositive
             }
             return -1;
         }
+
+        public static int GetValue<T>(R<T> r)
+            where T : class
+        {
+            if (r.Prop is S s)
+            {
+                return s.Value;
+            }
+            return -1;
+        }
+
+        public static int GetValue2<T>(R<T> r)
+        {
+            if (r.Prop is S s)
+            {
+                return s.Value;
+            }
+            return -1;
+        }
+    }
+
+    public class R<T> 
+    {
+        public T Prop { get; set; }
+    }
+
+    public class S
+    {
+        public int Value { get; set; }
     }
 }
